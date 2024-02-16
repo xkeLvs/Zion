@@ -1,0 +1,22 @@
+﻿@page "/students"
+@using Volo.Abp.MultiTenancy
+@inherits ZionComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Zion.Students.Dtos
+
+<Heading Size="HeadingSize.Is1">Student List</Heading>
+<Field Flex="Flex.JustifyContent.Between">
+    <Div>
+        <Button Type="ButtonType.Link" To="/student/add" Color="Color.Primary" Size="Size.Small">Add Student </Button>
+    </Div>
+</Field>
+
+
+<DataGrid TItem="StudentDto" Data="@students" Responsive
+          ShowPager
+          ShowPageSizes
+          PagerPosition="DataGridPagerPosition.TopAndBottom"
+          PagerOptions="new(){ ButtonSize=Size.Small }">
+    <DataGridColumn TItem="StudentDto" Field="@nameof(StudentDto.FirstName)" Caption="First Name" Sortable="true" />
+    <DataGridColumn TItem="StudentDto" Field="@nameof(StudentDto.LastName)" Caption="Last Name" Sortable="true" />
+</DataGrid>

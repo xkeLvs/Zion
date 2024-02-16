@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using Zion.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Zion.EntityFrameworkCore;
 namespace Zion.Migrations
 {
     [DbContext(typeof(ZionDbContext))]
-    partial class ZionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240215190521_AddSchoolDetails")]
+    partial class AddSchoolDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

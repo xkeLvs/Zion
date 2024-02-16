@@ -4,6 +4,7 @@ using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -12,6 +13,13 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Zion.Rooms;
+using Zion.SchoolYears;
+using Zion.Sections;
+using Zion.Students;
+using Zion.Subjects;
+using Zion.Teachers;
+
 
 namespace Zion.EntityFrameworkCore;
 
@@ -51,6 +59,25 @@ public class ZionDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    // Students
+    public virtual DbSet<Student> Students { get; set; }
+
+    // School Years
+    public virtual DbSet<SchoolYear> SchoolYears { get; set; }
+
+    // Rooms
+    public virtual DbSet<Room> Rooms { get; set; }
+
+    // Sections
+    public virtual DbSet<Section> Sections { get; set; }
+
+    // Teachers
+
+    public virtual DbSet<Teacher> Teachers { get; set; }
+
+    // Subjects
+    public virtual DbSet<Subject> Subjects { get; set; }
+
     #endregion
 
     public ZionDbContext(DbContextOptions<ZionDbContext> options)
@@ -74,6 +101,15 @@ public class ZionDbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
+
+        ConfigureStudents(builder);
+
+        ConfigureSchoolYears(builder);
+        ConfigureRooms(builder);
+        ConfigureSections(builder);
+        ConfigureTeachers(builder);
+        ConfigureSubjects(builder);
+
         /* Configure your own tables/entities inside here */
 
         //builder.Entity<YourEntity>(b =>
@@ -83,4 +119,60 @@ public class ZionDbContext :
         //    //...
         //});
     }
+
+    private void ConfigureStudents(ModelBuilder builder)
+    {
+        builder.Entity<Student>(b =>
+        {
+            b.ToTable(ZionConsts.DbTablePrefix + "Students", ZionConsts.DbSchema);
+            b.ConfigureByConvention(); ;
+        });
+    }
+
+    private void ConfigureSchoolYears(ModelBuilder builder)
+    {
+        builder.Entity<SchoolYear>(b =>
+        {
+            b.ToTable(ZionConsts.DbTablePrefix + "SchoolYears", ZionConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+    }
+
+    private void ConfigureRooms(ModelBuilder builder)
+    {
+        builder.Entity<Room>(b =>
+        {
+            b.ToTable(ZionConsts.DbTablePrefix + "Rooms", ZionConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+    }
+
+    private void ConfigureSections(ModelBuilder builder)
+    {
+        builder.Entity<Section>(b =>
+        {
+            b.ToTable(ZionConsts.DbTablePrefix + "Sections", ZionConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+    }
+
+    private void ConfigureTeachers(ModelBuilder builder)
+    {
+        builder.Entity<Teacher>(b =>
+        {
+            b.ToTable(ZionConsts.DbTablePrefix + "Teachers", ZionConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+    }
+
+    private void ConfigureSubjects(ModelBuilder builder)
+    {
+        builder.Entity<Subject>(b =>
+        {
+            b.ToTable(ZionConsts.DbTablePrefix + "Subjects", ZionConsts.DbSchema);
+            b.ConfigureByConvention();
+        });
+    }
+
+
 }

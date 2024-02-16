@@ -1,0 +1,109 @@
+﻿@page "/student/add"
+@using Volo.Abp.MultiTenancy
+@inherits ZionComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<Alert Color="Color.Success" @bind-Visible="@successVisible">
+    <AlertMessage>Successfully added a Student!</AlertMessage>
+    <CloseButton />
+</Alert>
+
+<Alert Color="Color.Warning" @bind-Visible="@warningVisible">
+    <AlertMessage>Warning! Please Fill up the required fields</AlertMessage>
+    <CloseButton />
+</Alert>
+
+<Div class="p-3 text-bg-light" Border="Border.Is2.Rounded">
+    <Heading Size="HeadingSize.Is2">Student Information</Heading>
+    <Divider />
+    <Validations @ref="@Validations" Mode="ValidationMode.Manual" Model="@createStudentDto">
+        <Fields>
+
+            <Validation>
+                <Field ColumnSize="ColumnSize.Is5.OnDesktop">
+                    <FieldLabel>LAST NAME*</FieldLabel>
+                    <TextEdit @bind-Text="@createStudentDto.LastName" />
+                </Field>
+            </Validation>
+
+            <Validation>
+                <Field ColumnSize="ColumnSize.Is5.OnDesktop">
+                    <FieldLabel>FIRST NAME*</FieldLabel>
+                    <TextEdit @bind-Text="@createStudentDto.FirstName" />
+                </Field>
+            </Validation>
+
+            <Field ColumnSize="ColumnSize.Is2.OnDesktop">
+                <FieldLabel>MIDDLE NAME</FieldLabel>
+                <TextEdit @bind-Text="@createStudentDto.MiddleName" />
+            </Field>
+
+            <Validation>
+                <Field ColumnSize="ColumnSize.Is12.OnDesktop">
+                    <FieldLabel>ADDRESS</FieldLabel>
+                    <TextEdit @bind-Text="@createStudentDto.Address" />
+                </Field>
+            </Validation>
+            <Validation>
+                <Field ColumnSize="ColumnSize.Is4.OnDesktop">
+                    <FieldLabel>BIRTHDATE</FieldLabel>
+                    <Addons>
+                        <Addon AddonType="AddonType.Body">
+                            <DatePicker @ref="@datePicker" TValue="DateTime?"
+                                @bind-Date="@createStudentDto.BirthDate" />
+                        </Addon>
+                        <Addon AddonType="AddonType.End">
+                            <Button Color="Color.Light" Clicked="@(()=>datePicker.ToggleAsync())">
+                                <Icon Name="IconName.CalendarDay" />
+                            </Button>
+                        </Addon>
+                    </Addons>
+                </Field>
+            </Validation>
+
+            <Field>
+                <FieldLabel>PICTURE (1X1 OR 2X2)</FieldLabel>
+                <FilePicker Multiple Upload="OnFileUpload" ShowMode="FilePickerShowMode.List" />
+            </Field>
+
+            <Field>
+                <FieldLabel>BIRTH CERTIFICATE</FieldLabel>
+                <FilePicker Multiple Upload="OnFileUpload" ShowMode="FilePickerShowMode.List" />
+            </Field>
+        </Fields>
+
+        <Divider />
+        <Heading Size="HeadingSize.Is2">Parent Information</Heading>
+        <Divider />
+
+        <Fields>
+            <Validation>
+                <Field ColumnSize="ColumnSize.Is5.OnDesktop">
+                    <FieldLabel>LASTNAME*</FieldLabel>
+                    <TextEdit @bind-Text="@createStudentDto.ParentLastName" />
+                </Field>
+            </Validation>
+
+            <Validation>
+                <Field ColumnSize="ColumnSize.Is5.OnDesktop">
+                    <FieldLabel>FIRST NAME*</FieldLabel>
+                    <TextEdit @bind-Text="@createStudentDto.ParentFirstName" />
+                </Field>
+            </Validation>
+            <Field ColumnSize="ColumnSize.Is2.OnDesktop">
+                <FieldLabel>MIDDLE NAME</FieldLabel>
+                <TextEdit @bind-Text="@createStudentDto.ParentMiddleName" />
+            </Field>
+            <Validation>
+                <Field ColumnSize="ColumnSize.Is5.OnDesktop">
+                    <FieldLabel>CONTACT NUMBER*</FieldLabel>
+                    <TextEdit @bind-Text="@createStudentDto.ContactNumber" />
+                </Field>
+            </Validation>
+        </Fields>
+    </Validations>
+    
+    <Button Color="Color.Danger" Type="ButtonType.Link" To="/students">Cancel</Button>
+    <Button Color="Color.Primary" Clicked="@Submit">Submit</Button>
+
+</Div>

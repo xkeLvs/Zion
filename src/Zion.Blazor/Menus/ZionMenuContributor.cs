@@ -23,14 +23,68 @@ public class ZionMenuContributor : IMenuContributor
         var administration = context.Menu.GetAdministration();
         var l = context.GetLocalizer<ZionResource>();
 
+        // context.Menu.Items.Insert(
+        //     0,
+        //     new ApplicationMenuItem(
+        //         "Dashboard",
+        //         "Dashboard",
+        //         "/",
+        //         icon: "fas fa-home",
+        //         order: 0
+        //     )
+        // );
         context.Menu.Items.Insert(
-            0,
+            1,
             new ApplicationMenuItem(
-                ZionMenus.Home,
-                l["Menu:Home"],
-                "/",
+                "Students",
+                "Students",
+                "/Students",
                 icon: "fas fa-home",
-                order: 0
+                order: 1
+            )
+        );
+
+        context.Menu.Items.Insert(
+            2,
+            new ApplicationMenuItem(
+                "Teachers",
+                "Teachers",
+                "/Teachers",
+                icon: "fas fa-home",
+                order: 2
+            )
+        );
+
+        context.Menu.Items.Insert(
+            3,
+            new ApplicationMenuItem(
+                "Subjects",
+                "Subjects",
+                "/Subjects",
+                icon: "fas fa-home",
+                order: 3
+            )
+        );
+
+        context.Menu.Items.Insert(
+            4,
+            new ApplicationMenuItem(
+                "Rooms",
+                "Rooms",
+                "/Rooms",
+                icon: "fas fa-home",
+                order: 4
+            )
+        );
+
+        context.Menu.Items.Insert(
+            5,
+            new ApplicationMenuItem(
+                "Sections",
+                "Sections",
+                "/Sections",
+                icon: "fas fa-home",
+                order: 5
             )
         );
 
