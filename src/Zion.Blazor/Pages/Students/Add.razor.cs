@@ -6,7 +6,7 @@ using Zion.Students.Dtos;
 using Microsoft.AspNetCore.Components;
 using Zion.Students;
 
-namespace Zion.Blazor.Pages.Students.Add;
+namespace Zion.Blazor.Pages.Students;
 
 public partial class Add
 {
