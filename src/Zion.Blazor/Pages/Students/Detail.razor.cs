@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Zion.Students.Dtos;
 using Microsoft.AspNetCore.Components;
 using Zion.Students;
-using System.Text.Json;
 
 namespace Zion.Blazor.Pages.Students;
 
-public partial class Add
+public partial class Detail
 {
+
+    [Parameter]
+    public Guid Id { get; set; }
 
     DatePicker<DateTime?>? datePicker;
 
@@ -57,8 +59,6 @@ public partial class Add
         {
             // create function for adding student  
             await studentAppService.CreateAsync(createStudentDto);
-            Console.WriteLine(JsonSerializer.Serialize("createStudentDto"));
-            Console.WriteLine(JsonSerializer.Serialize(createStudentDto));
             createStudentDto = new();
             await Validations.ClearAll();
             successVisible = true;

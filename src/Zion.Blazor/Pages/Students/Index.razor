@@ -12,11 +12,25 @@
 </Field>
 
 
-<DataGrid TItem="StudentDto" Data="@students" Responsive
-          ShowPager
-          ShowPageSizes
-          PagerPosition="DataGridPagerPosition.TopAndBottom"
-          PagerOptions="new(){ ButtonSize=Size.Small }">
+<DataGrid TItem="StudentDto" Data="@students" Responsive ShowPager ShowPageSizes
+    PagerPosition="DataGridPagerPosition.TopAndBottom" PagerOptions="new(){ ButtonSize=Size.Small }">
     <DataGridColumn TItem="StudentDto" Field="@nameof(StudentDto.FirstName)" Caption="First Name" Sortable="true" />
     <DataGridColumn TItem="StudentDto" Field="@nameof(StudentDto.LastName)" Caption="Last Name" Sortable="true" />
+    <DataGridColumn TItem="StudentDto" Field="@nameof(StudentDto.BirthDate)" Caption="Brithday" Sortable="true">
+        <DisplayTemplate>
+            @context.BirthDate.ToString("MMMM dd,yyyy")
+        </DisplayTemplate>
+    </DataGridColumn>
+    <DataGridColumn TItem="StudentDto" Field="@nameof(StudentDto.Id)" Caption="Action" Sortable="true">
+        <DisplayTemplate>
+
+            <a class="btn btn-sm bg-success text-white" href="/student/@context.Id" Color="Color.Success">
+                View
+            </a>
+
+            <Button Type="ButtonType.Link" To="/student/add" Color="Color.Danger" Size="Size.Small">
+                Delete
+            </Button>
+        </DisplayTemplate>
+    </DataGridColumn>
 </DataGrid>

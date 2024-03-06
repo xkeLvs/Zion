@@ -27,20 +27,11 @@ public class StudentAppService :
 
     }
 
-    public async Task<List<StudentDto>> GetAllListAsync()
+    public async Task<List<StudentDto>?> GetAllListAsync()
     {
         var students = await Repository.ToListAsync();
 
-        // Map the students to the StudentDto
-        var studentDtos = students.Select(student => new StudentDto
-        {
-            Id = student.Id,
-            FirstName = student.FirstName,
-            LastName = student.LastName,
-            // Add other properties as needed
-        }).ToList();
-
-        return studentDtos;
+        return ObjectMapper.Map<List<Student>, List<StudentDto>>(students);
     }
 
 }
